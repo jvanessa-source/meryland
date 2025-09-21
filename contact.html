@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <title>Contact & Booking</title>  
+</head>
+<body>
+
+    <!-- Navbar -->
+<nav class="navbar navbar-expand-lg bg-light shadow-sm">
+  <div class="container">
+    <a class="navbar-brand" href="index.html">
+      <img src="images/logo.jpg" alt="Logo" width="35" height="35" class="d-inline-block align-text-top">
+      Meryland
+    </a>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+        <li class="nav-item"><a class="nav-link active" href="contact.html">Contact & Booking</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<section class="contact">
+  <div class="container-contact">
+    <h1>Book Your Service</h1>
+    <form id="bookingForm">
+      <div>
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      <div>
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div>
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" name="phone">
+      </div>
+      <div>
+        <label for="service">Service</label>
+        <select id="service" name="service" required>
+          <option value="">-- Select a Service --</option>
+          <option value="Laundry (Wash)">Laundry (Wash)</option>
+          <option value="Ironing">Ironing</option>
+          <option value="Repairs">Repairs</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+      <div>
+        <label for="message">Additional Notes</label>
+        <textarea id="message" name="message" placeholder="Let us know any details..."></textarea>
+      </div>
+      <button type="submit">Send via WhatsApp</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById("bookingForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+      const phone = document.getElementById("phone").value;
+      const service = document.getElementById("service").value;
+      const message = document.getElementById("message").value;
+
+      const whatsappNumber = "573043708470";
+
+      const text = `Hello! I would like to book a service:%0A%0A` +
+                   `*Name:* ${name}%0A` +
+                   `*Email:* ${email}%0A` +
+                   `*Phone:* ${phone}%0A` +
+                   `*Service:* ${service}%0A` +
+                   `*Notes:* ${message}`;
+
+      // Detect device (mobile vs desktop)
+      const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+      const baseUrl = isMobile ? "https://wa.me/" : "https://web.whatsapp.com/send";
+
+      const url = isMobile
+        ? `${baseUrl}${whatsappNumber}?text=${text}`
+        : `${baseUrl}?phone=${whatsappNumber}&text=${text}`;
+
+      window.open(url, "_blank");
+    });
+  </script>
+</section>
+
+<footer>
+  <div class="container text-center">
+    <p><strong>Operating Hours</strong></p>
+    <p>Mon-Fri: 8am - 6pm | Sat: 8am - 5pm</p>
+    <a href="https://www.instagram.com/merylandlav/">Instagram</a>
+  </div>
+</footer>
+
+</body>
+</html>
